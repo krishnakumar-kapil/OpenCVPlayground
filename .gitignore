@@ -1,0 +1,14 @@
+
+*.cmake
+
+*.bin
+
+*.out
+
+*.txt
+
+*.c
+
+*.make
+
+*.includecache
