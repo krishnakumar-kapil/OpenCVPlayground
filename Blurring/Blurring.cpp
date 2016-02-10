@@ -23,7 +23,7 @@ int main(int argc, char** argv){
 
     for ( int i = 1; i < MAX_KERNEL_LENGTH; i = i + 2 ){ 
 		   GaussianBlur( image, blurredImage, Size(i,i) , 3, 3 );
-      }
+      // }
 
 
 
