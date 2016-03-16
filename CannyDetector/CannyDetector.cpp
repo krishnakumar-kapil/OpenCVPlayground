@@ -20,7 +20,13 @@ char* window_name = "Canny Detector";
 
 
 int main(int argc, char** argv){
-	blur(src_gray, detected_edge, )
+	src = imread( argv[1]);
+	if( !src.data)
+		return -1;
+
+	
+
+
 
 }
 

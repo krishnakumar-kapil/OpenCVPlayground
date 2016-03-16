@@ -48,10 +48,10 @@ RM = /usr/local/Cellar/cmake/3.5.0/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/PyrUp"
+CMAKE_SOURCE_DIR = "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/PyrUp"
+CMAKE_BINARY_DIR = "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = "/Users/kapilkrishnakumar/Documents/All Personal Projects/Com
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.2.3/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.5.0/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/PyrUp/CMakeFiles" "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/PyrUp/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving/CMakeFiles" "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving/CMakeFiles/progress.marks"
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/PyrUp/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named PyrUp
+# Target rules for targets named SeamCarving
 
 # Build rule for target.
-PyrUp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PyrUp
-.PHONY : PyrUp
+SeamCarving: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 SeamCarving
+.PHONY : SeamCarving
 
 # fast build rule for target.
-PyrUp/fast:
-	$(MAKE) -f CMakeFiles/PyrUp.dir/build.make CMakeFiles/PyrUp.dir/build
-.PHONY : PyrUp/fast
+SeamCarving/fast:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/build
+.PHONY : SeamCarving/fast
 
-PyrUp.o: PyrUp.cpp.o
+SeamCarving.o: SeamCarving.cpp.o
 
-.PHONY : PyrUp.o
+.PHONY : SeamCarving.o
 
 # target to build an object file
-PyrUp.cpp.o:
-	$(MAKE) -f CMakeFiles/PyrUp.dir/build.make CMakeFiles/PyrUp.dir/PyrUp.cpp.o
-.PHONY : PyrUp.cpp.o
+SeamCarving.cpp.o:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/SeamCarving.cpp.o
+.PHONY : SeamCarving.cpp.o
 
-PyrUp.i: PyrUp.cpp.i
+SeamCarving.i: SeamCarving.cpp.i
 
-.PHONY : PyrUp.i
+.PHONY : SeamCarving.i
 
 # target to preprocess a source file
-PyrUp.cpp.i:
-	$(MAKE) -f CMakeFiles/PyrUp.dir/build.make CMakeFiles/PyrUp.dir/PyrUp.cpp.i
-.PHONY : PyrUp.cpp.i
+SeamCarving.cpp.i:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/SeamCarving.cpp.i
+.PHONY : SeamCarving.cpp.i
 
-PyrUp.s: PyrUp.cpp.s
+SeamCarving.s: SeamCarving.cpp.s
 
-.PHONY : PyrUp.s
+.PHONY : SeamCarving.s
 
 # target to generate assembly for a file
-PyrUp.cpp.s:
-	$(MAKE) -f CMakeFiles/PyrUp.dir/build.make CMakeFiles/PyrUp.dir/PyrUp.cpp.s
-.PHONY : PyrUp.cpp.s
+SeamCarving.cpp.s:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/SeamCarving.cpp.s
+.PHONY : SeamCarving.cpp.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... PyrUp"
-	@echo "... PyrUp.o"
-	@echo "... PyrUp.i"
-	@echo "... PyrUp.s"
+	@echo "... SeamCarving"
+	@echo "... SeamCarving.o"
+	@echo "... SeamCarving.i"
+	@echo "... SeamCarving.s"
 .PHONY : help
 
 
