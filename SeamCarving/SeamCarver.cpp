@@ -135,3 +135,24 @@ void SeamCarver::removeVerticalSeam(vector<uint> seam){
       computeFullEnergy();
         
 }
+
+vector<uint> SeamCarver::findHorizontalSeam(){
+    vector<uint> seam(image.cols);
+
+    transpose(image, image);
+    transpose(energy, energy);
+
+    seam = findVerticalSeam();
+
+    transpose(image,image);
+    transpose(energy, energy);
+    return seam;
+}
+
+void SeamCarver::removeHorizontalSeam(vector<uint> seam){
+    transpose(image,image);
+    transpose(energy, energy);
+    removeVerticalSeam(seam);
+    transpose(image,image);
+    transpose(energy,energy); 
+}
