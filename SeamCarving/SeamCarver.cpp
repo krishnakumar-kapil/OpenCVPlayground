@@ -82,9 +82,56 @@ vector<uint> SeamCarver::findVerticalSeam(){
     }
 
 
-    for(int i = 0; i < image.rows; ++i){
-        for(int j = 0; j < image.cols; ++j){
- 
+    for(int row = 0; row < image.rows; ++row){
+        for(int col = 0; col < image.cols; ++col){
+            //botom left pixel
+            if(col != 0 && (distTo[row + 1][col - 1] > distTo[row][col] + getEnergy(row+1, col-1))){
+                distTo[row+1][col - 1] = distTo[row][col] + getEnergy(row+1, col-1);
+                edgeTo[row+1][col - 1] = 1;
+            }
+
+            if(distTo[row + 1][col] > distTo[row][col] + getEnergy(row+1, col)){
+                distTo[row+1][col] = distTo[row][col] + getEnergy(row + 1, col);
+                edgeTo[row+1][col] = 0;
+            }
+
+            if(col != image.cols - 1 && (distTo[row + 1][col + 1] > distTo[row][col] + getEnergy(row+1, col+1))){
+                distTo[row+1][col + 1] = distTo[row][col] + getEnergy(row + 1, col+1);
+                edgeTo[row+1][col + 1] = -1;
+            }
         }
     }
+    
+    //Retrace
+    unsigned int min_index = 0;
+    unistned int min = dist[image.rows - 1][0];
+    for(int j = 0; j < image.col; j++){
+        if(dist[image.rows - 1][j] < min){
+            min = dist[image.rows - 1][j];
+            min_index = j;
+        }
+    }
+
+    //Basically seam stores the indexes of all the vertical seams..
+    // its able to traverse by using the edgeTo which stores whether to 
+    // go ahead or go behind in that particular row
+    seam[image.rows - 1] = min_index;
+    for(int i = image.rows -1; i >0; --i){
+        seam[i-1] = seam[i] + edgeTo[i]seam[i];
+    }
+    return seam;
+}
+
+void SeamCarver::removeVerticalSeam(vector<uint> seam){
+      for (int row = 0; row < image.rows; ++row) {
+            for (int col = seam[row]; col < image.cols-1; ++col)
+                image.at<Vec3b>(row, col) = image.at<Vec3b>(row, col+1);
+          }
+
+      //Resize the image to remove the last column
+      image = image(Rect(0, 0, image.cols-1, image.rows));
+       
+      //Re-compute the energy of the new image
+      computeFullEnergy();
+        
 }
