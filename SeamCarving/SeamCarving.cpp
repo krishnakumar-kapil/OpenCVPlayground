@@ -5,6 +5,11 @@
 #include "opencv2/highgui/highgui.hpp"
 using namespace cv;
 
+typedef struct _Node{
+    long data;
+    int path;
+}node;
+
 int main(int argc, char** argv){
     Mat orig_image;
     Mat gray, src_gray;
@@ -14,6 +19,11 @@ int main(int argc, char** argv){
     char *window_name = "Seam Carving";
 
     orig_image = imread(argv[1], 1);
+    if(!orig_image) {
+        cout << "Invalid Input" 
+        orig_image.release();
+        return -1;
+    }
     namedWindow("Original Image", WINDOW_AUTOSIZE);
     imshow("Original Image", orig_image);
     waitKey(0);
@@ -34,6 +44,32 @@ int main(int argc, char** argv){
    imshow(window_name, grad);
 
 
+
+
+
     waitKey(0);
     return 0;
+}
+
+int which_min(int x,int y){
+    if(x < y)
+        return 0;
+    else 
+        return 1;
+}
+
+int which_min(int x, int y, int z){
+    if (min(x,y,z) == x)
+        return 0;
+    elif(min(x,y,z) == y)
+        return 1;
+    else 
+        return 2;
+}
+
+Node
+path(){
+
+    int t=0;
+    for j = 0; 
 }
