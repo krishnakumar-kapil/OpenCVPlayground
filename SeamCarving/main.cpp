@@ -10,8 +10,14 @@ int main(int argc, char **argv){
     string title = argv[1];
     int width = atoi(argv[2]);
     int height = atoi(argv[3]);
+    if(width > 1078 || height > 1000){
+        cout << "Please use smaller pictures";
+        return -1;
+    }
 
-    Mat_<Vec3b> image = imread(title);
+    if(title == "")
+        return -1;
+    Mat_<Vec3b> image = imread(title, CV_LOAD_IMAGE_COLOR);
 //  Mat_<Vec3b> image = imread("lighthouse.jpg");
 //  Mat_<Vec3b> image = imread("bench.jpg");
     if (!image.data) {
@@ -35,7 +41,10 @@ int main(int argc, char **argv){
 		s.removeHorizontalSeam(seam);
 	}
 	imshow("Carved Image", s.getImage());
-    cout << "Press any key to continue\n";
+    //cout << "Press any key to continue\n";
+
+    //`cout << "Writing out carved image to /carved/";
+    //iwrite("./carved/"+title, s.getImage());
 	waitKey(0);
 	image.release();
     return 0;
