@@ -10,11 +10,7 @@ int main(int argc, char **argv){
     string title = argv[1];
     int width = atoi(argv[2]);
     int height = atoi(argv[3]);
-    if(width > 1078 || height > 1000){
-        cout << "Please use smaller pictures";
-        return -1;
-    }
-
+    
     if(title == "")
         return -1;
     Mat_<Vec3b> image = imread(title, CV_LOAD_IMAGE_COLOR);
@@ -23,6 +19,10 @@ int main(int argc, char **argv){
     if (!image.data) {
         cout << "Invalid input";
         image.release();
+        return -1;
+    }
+    if(width > 1078 || height > 1000){
+        cout << "Please use smaller pictures";
         return -1;
     }
 
