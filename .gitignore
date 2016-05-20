@@ -14,7 +14,7 @@
 *.includecache
 
 *.swp
-
+*.o
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
