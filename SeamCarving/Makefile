@@ -48,10 +48,10 @@ RM = /usr/local/Cellar/cmake/3.5.0/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving"
+CMAKE_SOURCE_DIR = /Users/kapilkrishnakumar/Documents/AllPersonalProjects/ComputerVision/OpenCV/SeamCarving
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving"
+CMAKE_BINARY_DIR = /Users/kapilkrishnakumar/Documents/AllPersonalProjects/ComputerVision/OpenCV/SeamCarving
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving/CMakeFiles" "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/kapilkrishnakumar/Documents/AllPersonalProjects/ComputerVision/OpenCV/SeamCarving/CMakeFiles /Users/kapilkrishnakumar/Documents/AllPersonalProjects/ComputerVision/OpenCV/SeamCarving/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/kapilkrishnakumar/Documents/All Personal Projects/ComputerVision/OpenCV/SeamCarving/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/kapilkrishnakumar/Documents/AllPersonalProjects/ComputerVision/OpenCV/SeamCarving/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,32 +123,59 @@ SeamCarving/fast:
 	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/build
 .PHONY : SeamCarving/fast
 
-SeamCarving.o: SeamCarving.cpp.o
+SeamCarver.o: SeamCarver.cpp.o
 
-.PHONY : SeamCarving.o
+.PHONY : SeamCarver.o
 
 # target to build an object file
-SeamCarving.cpp.o:
-	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/SeamCarving.cpp.o
-.PHONY : SeamCarving.cpp.o
+SeamCarver.cpp.o:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/SeamCarver.cpp.o
+.PHONY : SeamCarver.cpp.o
 
-SeamCarving.i: SeamCarving.cpp.i
+SeamCarver.i: SeamCarver.cpp.i
 
-.PHONY : SeamCarving.i
+.PHONY : SeamCarver.i
 
 # target to preprocess a source file
-SeamCarving.cpp.i:
-	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/SeamCarving.cpp.i
-.PHONY : SeamCarving.cpp.i
+SeamCarver.cpp.i:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/SeamCarver.cpp.i
+.PHONY : SeamCarver.cpp.i
 
-SeamCarving.s: SeamCarving.cpp.s
+SeamCarver.s: SeamCarver.cpp.s
 
-.PHONY : SeamCarving.s
+.PHONY : SeamCarver.s
 
 # target to generate assembly for a file
-SeamCarving.cpp.s:
-	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/SeamCarving.cpp.s
-.PHONY : SeamCarving.cpp.s
+SeamCarver.cpp.s:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/SeamCarver.cpp.s
+.PHONY : SeamCarver.cpp.s
+
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/SeamCarving.dir/build.make CMakeFiles/SeamCarving.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -159,9 +186,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SeamCarving"
-	@echo "... SeamCarving.o"
-	@echo "... SeamCarving.i"
-	@echo "... SeamCarving.s"
+	@echo "... SeamCarver.o"
+	@echo "... SeamCarver.i"
+	@echo "... SeamCarver.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

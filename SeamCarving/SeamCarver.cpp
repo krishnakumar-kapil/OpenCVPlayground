@@ -1,46 +1,47 @@
 #include "SeamCarver.h"
+#include <stdio.h>
 
 void SeamCarver::showVerticalSeam(vector<uint> seam){
     Mat temp;
     image.copyTo(temp);
-    for(int i = 0; i < tmp.rows; ++i){
-        tmp.at<Vec3b>(i, seam[i]) = Vec3b(0,0,255);
+    for(int i = 0; i < temp.rows; ++i){
+        temp.at<Vec3b>(i, seam[i]) = Vec3b(0,0,255);
     }
-    imshow("Seam", tmp)
-    tmp.release();
+    imshow("Seam", temp);
+    temp.release();
 }
 
 void SeamCarver::showHorizontalSeam(vector<uint> seam){
     Mat temp;
     image.copyTo(temp);
-    for(int i = 0; i < tmp.cols; ++i){
-        tmp.at<Vec3b>(seam[i], i) = Vec3b(0,0,255);
+    for(int i = 0; i < temp.cols; ++i){
+        temp.at<Vec3b>(seam[i], i) = Vec3b(0,0,255);
     }
-    imshow("Seam", tmp)
-    tmp.release();
+    imshow("Seam", temp);
+    temp.release();
 }
 
 void SeamCarver::computeEnergy(){
     energy.create(image.rows, image.cols, CV_32S);
 
     //update the energy mat
-    for(int i = 0; i < image.rows; ++i){
+    for(int i = 1; i < image.rows; ++i){
         uchar *prev = image.ptr<uchar>(i - 1);
         uchar *curr = image.ptr<uchar>(i);
         uchar *next = image.ptr<uchar>(i + 1);
 
-        for(int j = 0; j < image.cols; ++j){
+        for(int j = 1; j < image.cols; ++j){
             int val = 0;
             //Energy across the x axis
             val += (prev[3*j]-next[3*j]) * (prev[3*j]-next[3*j]);
             val += (prev[3*j+1]-next[3*j+1]) * (prev[3*j+1]-next[3*j+1]);
-            val += (prev[3*j+2]-next[3*j+2]) * (prev[3*j+2]-next[3*j+2]); 
+            val += (prev[3*j+2]-next[3*j+2]) * (prev[3*j+2]-next[3*j+2]);
 
             val += (curr[3*j+3]-curr[3*j-3]) * (curr[3*j+3]-curr[3*j-3]);
             val += (curr[3*j+4]-curr[3*j-2]) * (curr[3*j+4]-curr[3*j-2]);
-            val += (curr[3*j+5]-curr[3*j-1]) * (curr[3*j+5]-curr[3*j-1]); 
+            val += (curr[3*j+5]-curr[3*j-1]) * (curr[3*j+5]-curr[3*j-1]);
 
-            energy.at<uint32_t>(i,j) = val;
+            energy.at<uint32_t>(i, j) = val;
         }
     }
 }
@@ -48,7 +49,7 @@ void SeamCarver::computeEnergy(){
 void SeamCarver::computeEnergyAfterSeamRemoval(vector<uint> seam){
     Mat tmp = Mat(image.rows, image.cols, CV_32S,Scalar(195075));
     for(unsigned int row = 0; row < (uint)image.rows; ++row){
-        for(unisgned int col = 0; col < (uint) image.cols; ++col){
+        for(unsigned int col = 0; col < (uint) image.cols; ++col){
             if(col < seam[row] - 1) tmp.at<uint32_t>(row, col) = energy.at<uint32_t>(row, col);
             if(col > seam[row])     tmp.at<uint32_t>(row, col) = energy.at<uint32_t>(row, col + 1);
 
@@ -75,14 +76,13 @@ vector<uint> SeamCarver::findVerticalSeam(){
     for(int i = 0; i < image.rows; ++i){
         for(int j = 0; j < image.cols; ++j){
             if (i == 0) distTo[i][j] = 0;
-            else        distTo[i][j] = j;
+            else        distTo[i][j] = numeric_limits<unsigned int>::max();;
 
             edgeTo[i][j] = 0;
         }
     }
 
-
-    for(int row = 0; row < image.rows; ++row){
+    for(int row = 0; row < image.rows - 1; ++row){
         for(int col = 0; col < image.cols; ++col){
             //botom left pixel
             if(col != 0 && (distTo[row + 1][col - 1] > distTo[row][col] + getEnergy(row+1, col-1))){
@@ -101,23 +101,26 @@ vector<uint> SeamCarver::findVerticalSeam(){
             }
         }
     }
+
+
     
     //Retrace
     unsigned int min_index = 0;
-    unistned int min = dist[image.rows - 1][0];
-    for(int j = 0; j < image.col; j++){
-        if(dist[image.rows - 1][j] < min){
-            min = dist[image.rows - 1][j];
+    unsigned int min = distTo[image.rows - 1][0];
+    for(int j = 0; j < image.cols; j++){
+        if(distTo[image.rows - 1][j] < min){
+            min = distTo[image.rows - 1][j];
             min_index = j;
         }
     }
+
 
     //Basically seam stores the indexes of all the vertical seams..
     // its able to traverse by using the edgeTo which stores whether to 
     // go ahead or go behind in that particular row
     seam[image.rows - 1] = min_index;
     for(int i = image.rows -1; i >0; --i){
-        seam[i-1] = seam[i] + edgeTo[i]seam[i];
+        seam[i-1] = seam[i] + edgeTo[i][seam[i]];
     }
     return seam;
 }
@@ -132,7 +135,7 @@ void SeamCarver::removeVerticalSeam(vector<uint> seam){
       image = image(Rect(0, 0, image.cols-1, image.rows));
        
       //Re-compute the energy of the new image
-      computeFullEnergy();
+      computeEnergy();
         
 }
 
