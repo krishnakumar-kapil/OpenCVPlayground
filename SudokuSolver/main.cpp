@@ -23,12 +23,13 @@ void preprocess(Mat *sudoku, Mat *outerBox){
     dilate(*outerBox, *outerBox, kernel);
  
 }
+
 int main(){
     Mat sudoku = imread("sudoku.jpg");
     Mat outerBox = Mat(sudoku.rows, sudoku.cols, CV_8UC1);
 
     preprocess(&sudoku, &outerBox);
-   imshow("OuterBox", outerBox);
+    imshow("OuterBox", outerBox);
     waitKey(0);
     return 0;
 }
