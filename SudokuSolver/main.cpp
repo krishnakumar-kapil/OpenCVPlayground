@@ -24,8 +24,28 @@ void preprocess(Mat *sudoku, Mat *outerBox){
  
 }
 
+void blobDetector(Mat *outerBox){
+    int count = 0;
+    int max = 1;
+    Point maxPt;
+
+    for(int y = 0; y < outerBox->size().height; ++y){
+        uchar *row = outerBox->ptr(y);
+        for(int x = 0; x < outerBox->size().width; ++x){
+            //Ensures that only the white areas are flooded
+            if(row[x] > 128){
+                int area = floodFill(*outerBox, Point(x, y), CV_RGB(0,0,64));
+                if(area > max){
+                    maxPt = Point(x,y);
+                    max = area;
+                }
+            }
+        }
+    }
+}
+
 int main(){
-    Mat sudoku = imread("sudoku.jpg");
+    Mat sudoku = imread("sudoku.jpg",CV_LOAD_IMAGE_GRAYSCALE);
     Mat outerBox = Mat(sudoku.rows, sudoku.cols, CV_8UC1);
 
     preprocess(&sudoku, &outerBox);
