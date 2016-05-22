@@ -57,16 +57,42 @@ void blobDetector(Mat *outerBox, Mat *kernel){
     erode(*outerBox, *outerBox, *kernel);
 }
 
+void drawLine(Vec2f line, Mat *img, Scalar rgb = CV_RGB(0,0,255)){
+    if(line[1] != 0){
+        float m = -1/tan(line[1]);
+        float c = line[0]/sin(line[1]);
+        cv::line(*img, Point(0, c), Point(img->size().width, m*img->size().width+c), rgb);
+    }
+    else {
+        cv::line(*img, Point(line[0], 0), Point(line[0], img->size().height), rgb);
+    }
+}
+
+vector<Vec2f> getLines(Mat *outerBox){
+   vector<Vec2f> lines; 
+   HoughLines(*outerBox, lines, 1, CV_PI/180, 200); 
+   for(int i = 0; i < lines.size(); ++i){
+       drawLine(lines[i], outerBox, CV_RGB(0,0,128));
+   }
+   return lines;
+}
+
+
+
 int main(){
     Mat sudoku = imread("sudoku.jpg",CV_LOAD_IMAGE_GRAYSCALE);
     Mat outerBox = Mat(sudoku.rows, sudoku.cols, CV_8UC1);
     Mat kernel = (Mat_<uchar>(3,3) << 0,1,0,1,1,1,0,1,0);
 
+    vector<Vec2f> lines;
     preprocess(&sudoku, &outerBox, &kernel);
-    imshow("OuterBox", outerBox);
+   // imshow("OuterBox", outerBox);
 
     blobDetector(&outerBox, &kernel);
-    imshow("Threshold", outerBox);
+    //imshow("Threshold", outerBox);
+
+    lines = getLines(&outerBox);
+    imshow("Lines", outerBox);
     waitKey(0);
     return 0;
 }
