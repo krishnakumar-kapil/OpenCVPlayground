@@ -9,8 +9,19 @@ def pixel_values(image):
     mean = np.mean(green_channel)
     std = np.std(green_channel)
 
-    green_mean = green_channel - np.full((width, height), mean)
-    cv2.imshow('green - mean', green_mean)
+    mean_array = np.full((width, height), mean) 
+    scaled = green_channel - mean_array
+    cv2.imshow('green - mean', scaled)
+    cv2.waitKey(0)
+    scaled = scaled / std
+    scaled *= 10
+    scaled += mean_array
+    cv2.imshow('new scaled', scaled)
+    cv2.waitKey(0)
+
+    difference = green_channel - scaled
+    cv2.imshow('difference', difference)
+    cv2.waitKey(0)
 
 def rep_pixels(image):
     width, height, ch = image.shape
@@ -47,7 +58,8 @@ def main():
     #swapper(image)
     #green(image)
     #red(image)
-    rep_pixels(image)
+    #rep_pixels(image)
+    pixel_values(image)
 
 if __name__ == '__main__':
     main()
